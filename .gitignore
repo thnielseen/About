@@ -3,22 +3,42 @@ logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependency directories
+node_modules/
+dist/
+dist-ssr/
+
+# Build artifacts
 *.local
+*.map
+*.map.css
+*.css.map
+
+# Environment variable files
+.env
+.env.*  
+
+# Vite-specific
+.vite/
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+!.vscode/extensions.json  # Keep extension recommendations
+.idea/
+.DS_Store  # macOS system files
+._*
+Thumbs.db  # Windows system files
+
+# Temp files and system files
+*.bak
+*.tmp
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+
+# Generated CSS
+style.css
