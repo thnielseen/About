@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: /about/
 
 # Triggers: Kör workflow när du pushar till main eller manuellt
 on:
