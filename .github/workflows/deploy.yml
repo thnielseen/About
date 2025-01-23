@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+# Triggers: Kör workflow när du pushar till main eller manuellt
+on:
+  push:
+    branches:
+      - main  # Kör bara när något pushas till main
+  workflow_dispatch:  # Gör det möjligt att köra manuellt via GitHub Actions UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # Använder en Ubuntu-miljö för att köra jobben
+
+    steps:
+      # 1. Checka ut koden från ditt repo
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      # 2. Sätt upp Node.js och PNPM
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Använder Node.js version 18
+          cache: "pnpm"  # Cacha PNPM-bibliotek för snabbare builds
+
+      # 3. Installera beroenden
+      - name: Install dependencies
+        run: |
+          corepack enable
+          pnpm install
+
+      # 4. Bygg projektet med Vite
+      - name: Build the project
+        run: pnpm run build
+
+      # 5. Deploya till GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Använd GitHub-token för autentisering
+          publish_dir: ./dist  # Publicera innehållet från dist-mappen
